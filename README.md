@@ -1,2 +1,2 @@
 # CPS_Pay_Backend
-Get the pay of anyone working Chicago Public Schools
+Get the pay of staff working at Chicago Public Schools
