@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, Response
 from threading import Thread
 from flask_restful import Resource, Api
+from flask_cors import CORS
 import xlrd
 import requests
 import os
@@ -8,6 +9,7 @@ import os
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 
 def run():
@@ -45,9 +47,9 @@ class Info(Resource):
             row = sheet.row_values(row_idx)
 
             if (school == 'Default' or school.lower() in row[2].lower()) and \
-            (fte == 'Default' or row[3] == float(fte)) and \
-            (job == 'Default' or job.lower() in row[9].lower()) and \
-            (lastName == 'Default' or lastName in row[10].lower()):
+            (fte == 'all' or row[3] == (1.0 if fte.lower() == 'full-time' else 0.5)) and \
+            (job == 'all' or job.lower() in row[9].lower()) and \
+            (lastName == 'Default' or lastName.lower() in row[10].lower()):
                 matches.append((row[2], row[3], row[5], row[7], row[9], row[10]))
 
         return jsonify(matches)
