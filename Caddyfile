@@ -1,3 +1,7 @@
-http://52.191.3.72 {
+www.06062022.xyz {
+  redir https://06062022.xyz{uri}
+}
+
+06062022.xyz {
   reverse_proxy localhost:8000
 }
