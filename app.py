@@ -58,8 +58,8 @@ class Info(Resource):
     #find most recent salary file
     filePos = response.find(
       "globalassets/cps-pages/about-cps/finance/employee-position-files/")
-    fileURL = "https://www.cps.edu/" + response[filePos:filePos + 100]
-    fileName = response[filePos + 65:filePos + 100]
+    fileURL = "https://www.cps.edu/" + response[filePos:filePos + 102]
+    fileName = response[filePos + 65:filePos + 102]
 
     #download file
     if not os.path.isfile(fileName):
