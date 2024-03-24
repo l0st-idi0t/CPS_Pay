@@ -56,15 +56,19 @@ class Info(Resource):
     response = str(requests.get(url).content)
 
     #find most recent salary file
-    filePos = response.find(
+    file_start_pos = response.find(
       "globalassets/cps-pages/about-cps/finance/employee-position-files/")
-    fileURL = "https://www.cps.edu/" + response[filePos:filePos + 102]
-    fileName = response[filePos + 65:filePos + 102]
+
+    file_end_pos = response.find(".xls", file_start_pos) + 4  # add 4 to include ".xls"
+
+    file_url = "https://www.cps.edu/" + response[file_start_pos:file_end_pos]
+
+    file_name = response[file_start_pos + 65:file_end_pos]
 
     #download file
-    if not os.path.isfile(fileName):
+    if not os.path.isfile(file_name):
       r = requests.get(fileURL)
-      with open(fileName, 'wb') as f:
+      with open(file_name, 'wb') as f:
         f.write(r.content)
 
     return fileName
