@@ -67,11 +67,11 @@ class Info(Resource):
 
     #download file
     if not os.path.isfile(file_name):
-      r = requests.get(fileURL)
+      r = requests.get(file_url)
       with open(file_name, 'wb') as f:
         f.write(r.content)
 
-    return fileName
+    return file_name
 
 
 #api endpoint
